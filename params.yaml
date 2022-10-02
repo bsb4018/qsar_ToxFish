@@ -1,0 +1,31 @@
+base:
+  project: fish toxicity prediction project
+  random_state: 44
+  target_col: output
+
+data_source:
+  s3_source: data_given/mod_qsar_fish_toxicity.csv
+
+load_data:
+  raw_dataset_csv: data/raw/mq_fish_toxicity.csv
+
+split_data:
+  train_path: data/processed/train_mq_fish_toxicity.csv
+  test_path: data/processed/test_mq_fish_toxicity.csv
+  test_size: 0.2
+
+estimators:
+  ElasticNet:
+    params:
+      alpha: 0.98
+      l1_ratio: 0.95
+      #alpha: 0.9
+      #l1_ratio: 0.4
+
+model_dir: saved_models
+
+reports:
+  params: report/params.json
+  scores: report/scores.json
+
+webapp_model_dir: prediction_service/model/model.joblib

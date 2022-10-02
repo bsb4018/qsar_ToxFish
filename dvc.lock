@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  load_data:
+    cmd: python src/load_data.py --config=params.yaml
+    deps:
+    - path: data_given/mod_qsar_fish_toxicity.csv
+      md5: fdb89e775d28b0257f63a89807e55c44
+      size: 31201
+    - path: src/get_data.py
+      md5: bc9d246246f44d8d27f5e3310afbe67b
+      size: 633
+    - path: src/load_data.py
+      md5: f49b8a715582a060d0baf4d74ba0bf31
+      size: 502
+    outs:
+    - path: data/raw/mq_fish_toxicity.csv
+      md5: fdb89e775d28b0257f63a89807e55c44
+      size: 31201

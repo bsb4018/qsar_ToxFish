@@ -1,7 +1,7 @@
 base:
   project: fish toxicity prediction project
   random_state: 44
-  target_col: output
+  target_col: responseLC50
 
 data_source:
   s3_source: data_given/mod_qsar_fish_toxicity.csv
@@ -17,8 +17,8 @@ split_data:
 estimators:
   ElasticNet:
     params:
-      alpha: 0.98
-      l1_ratio: 0.95
+      alpha: 0.0002
+      l1_ratio: 0.0001
       #alpha: 0.9
       #l1_ratio: 0.4
 

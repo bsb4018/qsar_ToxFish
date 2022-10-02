@@ -15,4 +15,21 @@ stages:
     - data/raw/mq_fish_toxicity.csv
     outs:
     - data/processed/train_mq_fish_toxicity.csv
-    - data/processed/test_mq_fish_toxicity.csv  
+    - data/processed/test_mq_fish_toxicity.csv
+
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - data/processed/train_mq_fish_toxicity.csv
+    - data/processed/test_mq_fish_toxicity.csv 
+    - src/train_and_evaluate.py
+    params:
+    - estimators.ElasticNet.params.alpha
+    - estimators.ElasticNet.params.l1_ratio
+    metrics:
+    - report/scores.json:
+        cache: false
+    - report/params.json:
+        cache: false
+    outs:
+    - saved_models/model.joblib 

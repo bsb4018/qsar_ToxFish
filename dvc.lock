@@ -32,3 +32,29 @@ stages:
     - path: data/processed/train_mq_fish_toxicity.csv
       md5: bbc87bf6938530f94d5fcdd314c1bdc7
       size: 24987
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_mq_fish_toxicity.csv
+      md5: 9eb1ebc501b17b7050ad21718e32ca68
+      size: 6268
+    - path: data/processed/train_mq_fish_toxicity.csv
+      md5: bbc87bf6938530f94d5fcdd314c1bdc7
+      size: 24987
+    - path: src/train_and_evaluate.py
+      md5: 8d2e06289db1cff655f6f3939528c4d0
+      size: 2489
+    params:
+      params.yaml:
+        estimators.ElasticNet.params.alpha: 0.0002
+        estimators.ElasticNet.params.l1_ratio: 0.0001
+    outs:
+    - path: report/params.json
+      md5: 57cca7bc178494eb45ce1e0923dddd81
+      size: 50
+    - path: report/scores.json
+      md5: ddcb478ff8f23552acdb68f315943a6b
+      size: 99
+    - path: saved_models/model.joblib
+      md5: 941e6427b4a79baf23f0eda7848cf63f
+      size: 1119

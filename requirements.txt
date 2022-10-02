@@ -1,0 +1,14 @@
+# third party
+dvc
+dvc[gdrive]
+sklearn
+pandas
+pyyaml
+pytest
+tox
+matplotlib
+seaborn
+flake8
+flask
+gunicorn
+jupyterlab

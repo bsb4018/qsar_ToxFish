@@ -7,3 +7,12 @@ stages:
     - data_given/mod_qsar_fish_toxicity.csv
     outs:
     - data/raw/mq_fish_toxicity.csv
+
+  split_data:
+    cmd: python src/split_data.py --config=params.yaml
+    deps:
+    - src/split_data.py
+    - data/raw/mq_fish_toxicity.csv
+    outs:
+    - data/processed/train_mq_fish_toxicity.csv
+    - data/processed/test_mq_fish_toxicity.csv  

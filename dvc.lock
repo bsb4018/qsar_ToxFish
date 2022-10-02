@@ -16,3 +16,19 @@ stages:
     - path: data/raw/mq_fish_toxicity.csv
       md5: fdb89e775d28b0257f63a89807e55c44
       size: 31201
+  split_data:
+    cmd: python src/split_data.py --config=params.yaml
+    deps:
+    - path: data/raw/mq_fish_toxicity.csv
+      md5: fdb89e775d28b0257f63a89807e55c44
+      size: 31201
+    - path: src/split_data.py
+      md5: 28f8560bb20b8e4d5f4a4de7933af494
+      size: 1040
+    outs:
+    - path: data/processed/test_mq_fish_toxicity.csv
+      md5: 9eb1ebc501b17b7050ad21718e32ca68
+      size: 6268
+    - path: data/processed/train_mq_fish_toxicity.csv
+      md5: bbc87bf6938530f94d5fcdd314c1bdc7
+      size: 24987

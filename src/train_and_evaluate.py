@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
+from sklearn.ensemble import GradientBoostingRegressor
 from get_data import read_params
 import argparse
 import joblib
@@ -25,8 +26,10 @@ def train_and_evaluate(config_path):
     random_state = config["base"]["random_state"]
     model_dir = config["model_dir"]
 
-    alpha = config["estimators"]["ElasticNet"]["params"]["alpha"]
-    l1_ratio = config["estimators"]["ElasticNet"]["params"]["l1_ratio"]
+    learning_rate = config["estimators"]["GradientBoostingRegressor"]["params"]["learning_rate"]
+    max_depth = config["estimators"]["GradientBoostingRegressor"]["params"]["max_depth"]
+    n_estimators = config["estimators"]["GradientBoostingRegressor"]["params"]["n_estimators"]
+    subsample = config["estimators"]["GradientBoostingRegressor"]["params"]["subsample"]
 
     target = [config["base"]["target_col"]]
 
@@ -39,17 +42,18 @@ def train_and_evaluate(config_path):
     train_x = train.drop(target, axis=1)
     test_x = test.drop(target, axis=1)
 
-    lr = ElasticNet(
-        alpha=alpha, 
-        l1_ratio=l1_ratio, 
-        random_state=random_state)
+    lr =GradientBoostingRegressor(
+        learning_rate=learning_rate, 
+        max_depth=max_depth, 
+        n_estimators=n_estimators,
+        subsample= subsample)
     lr.fit(train_x, train_y)
 
     predicted_qualities = lr.predict(test_x)
     
     (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
 
-    print("Elasticnet model (alpha=%f, l1_ratio=%f):" % (alpha, l1_ratio))
+    print("Elasticnet model (learning_rate=%f, max_depth=%f,n_estimator=%f,subsample=%f):" % (learning_rate, max_depth, n_estimators, subsample))
     print("  RMSE: %s" % rmse)
     print("  MAE: %s" % mae)
     print("  R2: %s" % r2)
@@ -67,8 +71,10 @@ def train_and_evaluate(config_path):
 
     with open(params_file, "w") as f:
         params = {
-            "alpha": alpha,
-            "l1_ratio": l1_ratio,
+            "learning_rate" : learning_rate, 
+            "max_depth": max_depth, 
+            "n_estimators": n_estimators,
+            "subsample": subsample
         }
         json.dump(params, f, indent=4)
 

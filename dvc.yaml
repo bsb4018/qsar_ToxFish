@@ -24,8 +24,10 @@ stages:
     - data/processed/test_mq_fish_toxicity.csv 
     - src/train_and_evaluate.py
     params:
-    - estimators.ElasticNet.params.alpha
-    - estimators.ElasticNet.params.l1_ratio
+    - estimators.GradientBoostingRegressor.params.learning_rate
+    - estimators.GradientBoostingRegressor.params.max_depth
+    - estimators.GradientBoostingRegressor.params.n_estimators
+    - estimators.GradientBoostingRegressor.params.subsample
     metrics:
     - report/scores.json:
         cache: false

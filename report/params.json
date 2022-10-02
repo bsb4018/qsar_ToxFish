@@ -1,4 +1,6 @@
 {
-    "alpha": 0.0002,
-    "l1_ratio": 0.0001
+    "learning_rate": 0.01,
+    "max_depth": 10,
+    "n_estimators": 500,
+    "subsample": 0.5
 }

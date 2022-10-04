@@ -26,12 +26,12 @@ input_data = {
     },
 
     "incorrect_col":
-    {"CIC03": 5, 
-    "SM1_Dz(Z": 1, 
-    "GATS1i": 0.5, 
+    {"CICs03": 5, 
+    "SM1a_Dz(Z": 1, 
+    "GAcTS1i": 0.5, 
     "NdsCHE": 10, 
-    "NdssC": 0.5, 
-    "MLOGP": 3
+    "NdsssC": 0.5, 
+    "MLdOGP": 3
     }
 }
 

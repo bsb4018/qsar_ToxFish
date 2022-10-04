@@ -12,12 +12,12 @@
         "max": 2.92
     },
     "NdsCH": {
-        "min": 0.0,
-        "max": 4.0
+        "min": 0,
+        "max": 4
     },
     "NdssC": {
-        "min": 0.0,
-        "max": 6.0
+        "min": 0,
+        "max": 6
     },
     "MLOGP": {
         "min": -2.884,

@@ -8,9 +8,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 from sklearn.ensemble import GradientBoostingRegressor
 from get_data import read_params
+from urllib.parse import urlparse
 import argparse
 import joblib
 import json
+import mlflow
 
 
 def eval_metrics(actual, pred):
@@ -42,46 +44,44 @@ def train_and_evaluate(config_path):
     train_x = train.drop(target, axis=1)
     test_x = test.drop(target, axis=1)
 
-    lr =GradientBoostingRegressor(
-        learning_rate=learning_rate, 
-        max_depth=max_depth, 
-        n_estimators=n_estimators,
-        subsample= subsample)
-    lr.fit(train_x.values, train_y.values)
+    mlflow_config = config["mlflow_config"]
+    remote_server_uri = mlflow_config["remote_server_uri"]
 
-    predicted_qualities = lr.predict(test_x)
+    mlflow.set_tracking_uri(remote_server_uri)
+
+    mlflow.set_experiment(mlflow_config["experiment_name"])
+
+    with mlflow.start_run(run_name=mlflow_config["run_name"]) as mlops_run:
+        lr = GradientBoostingRegressor(
+            learning_rate=learning_rate, 
+            max_depth=max_depth, 
+            n_estimators=n_estimators,
+            subsample= subsample)
+        lr.fit(train_x.values, train_y.values)
+
+        predicted_qualities = lr.predict(test_x)
     
-    (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
+        (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
 
-    print("Elasticnet model (learning_rate=%f, max_depth=%f,n_estimator=%f,subsample=%f):" % (learning_rate, max_depth, n_estimators, subsample))
-    print("  RMSE: %s" % rmse)
-    print("  MAE: %s" % mae)
-    print("  R2: %s" % r2)
+        mlflow.log_param("learning_rate",learning_rate)
+        mlflow.log_param("max_depth",max_depth)
+        mlflow.log_param("n_estimators",n_estimators)
+        mlflow.log_param("subsample",subsample)
 
-    scores_file = config["reports"]["scores"]
-    params_file = config["reports"]["params"]
 
-    with open(scores_file, "w") as f:
-        scores = {
-            "rmse": rmse,
-            "mae": mae,
-            "r2": r2
-        }
-        json.dump(scores, f, indent=4)
+        mlflow.log_metric("rmse", rmse)
+        mlflow.log_metric("mae", mae)
+        mlflow.log_metric("r2", r2)
 
-    with open(params_file, "w") as f:
-        params = {
-            "learning_rate" : learning_rate, 
-            "max_depth": max_depth, 
-            "n_estimators": n_estimators,
-            "subsample": subsample
-        }
-        json.dump(params, f, indent=4)
+        tracking_url_type_store = urlparse(mlflow.get_artifact_uri()).scheme
 
-    os.makedirs(model_dir, exist_ok=True)
-    model_path = os.path.join(model_dir, "model.joblib")
-
-    joblib.dump(lr, model_path)
+        if tracking_url_type_store != "file":
+            mlflow.sklearn.log_model(
+                lr, 
+                "model", 
+                registered_model_name=mlflow_config["registered_model_name"])
+        else:
+            mlflow.sklearn.load_model(lr, "model")
 
 
 if __name__=="__main__":

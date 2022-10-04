@@ -47,6 +47,12 @@ stages:
     params:
       params.yaml:
         estimators.GradientBoostingRegressor.params.learning_rate: 0.04
-        estimators.GradientBoostingRegressor.params.max_depth: 20
-        estimators.GradientBoostingRegressor.params.n_estimators: 600
-        estimators.GradientBoostingRegressor.params.subsample: 0.55
+        estimators.GradientBoostingRegressor.params.max_depth: 15
+        estimators.GradientBoostingRegressor.params.n_estimators: 250
+        estimators.GradientBoostingRegressor.params.subsample: 0.6
+  log_production_model:
+    cmd: python src/log_production_model.py --config=params.yaml
+    deps:
+    - path: src/log_production_model.py
+      md5: 0d2111987586c30c17c5bb7cccac6f04
+      size: 1825

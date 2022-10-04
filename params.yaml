@@ -17,10 +17,10 @@ split_data:
 estimators:
   GradientBoostingRegressor:
     params:
-      learning_rate: 0.04 #0.06 #0.01
-      max_depth: 20 #15 #10
-      n_estimators: 600 #250 #500
-      subsample: 0.55 #0.6 #0.5
+      learning_rate: 0.04 #0.01 #0.06
+      max_depth:  15 #10 #20
+      n_estimators: 250 #500 #600
+      subsample: 0.6 #0.5 #0.55
 
 model_dir: saved_models
 

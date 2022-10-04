@@ -23,7 +23,7 @@ def log_production_model(config_path):
     mlflow.set_tracking_uri(remote_server_uri)
     
     
-    runs = mlflow.search_runs(experiment_ids=1)
+    runs = mlflow.search_runs(experiment_ids='1')
     lowest = runs["metrics.mae"].sort_values(ascending=True)[0]
     lowest_run_id = runs[runs["metrics.mae"] == lowest]["run_id"][0]
     
@@ -47,8 +47,7 @@ def log_production_model(config_path):
                 name=model_name,
                 version=current_version,
                 stage="Staging"
-            )
-                    
+            )        
 
 
     loaded_model = mlflow.pyfunc.load_model(logged_model)
@@ -56,7 +55,6 @@ def log_production_model(config_path):
     model_path = config["webapp_model_dir"] #"prediction_service/model"
 
     joblib.dump(loaded_model, model_path)
-    
 
 
 if __name__ == '__main__':

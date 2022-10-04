@@ -47,7 +47,7 @@ def train_and_evaluate(config_path):
         max_depth=max_depth, 
         n_estimators=n_estimators,
         subsample= subsample)
-    lr.fit(train_x, train_y)
+    lr.fit(train_x.values, train_y.values)
 
     predicted_qualities = lr.predict(test_x)
     

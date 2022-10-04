@@ -42,8 +42,8 @@ stages:
       md5: bbc87bf6938530f94d5fcdd314c1bdc7
       size: 24987
     - path: src/train_and_evaluate.py
-      md5: ffd04c03292bb34bd8ea7e0230593703
-      size: 3013
+      md5: 7c07ff46796cdd12468a548679aafbd6
+      size: 3027
     params:
       params.yaml:
         estimators.GradientBoostingRegressor.params.learning_rate: 0.01
@@ -55,8 +55,8 @@ stages:
       md5: b0457c1c1cf5d04f6917a80173dbb113
       size: 102
     - path: report/scores.json
-      md5: 8359eda842efd5c416e0afe62db15bde
+      md5: a29ed10f8465b0723eee1b7e338389a3
       size: 99
     - path: saved_models/model.joblib
-      md5: d04d755867a32385d14f5063bba7cd8b
-      size: 12021997
+      md5: 844b72e7bd5d8eda98115448ed87fc19
+      size: 11886653

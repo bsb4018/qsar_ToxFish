@@ -67,18 +67,19 @@ def validate_input(dict_request):
 def form_response(dict_request):
     if validate_input(dict_request):
         data = dict_request.values()
-        newdata = []
-        for value in data:
-            if type(value) == float:
-                newdata.append(float(value))
-            else:
-                newdata.append(str(value))
-        #data = [list(map(float, data))]
-        print(newdata)
-        iparr = []
-        iparr.append(newdata)
-        print(iparr)
-        response = predict(iparr)
+        #newdata = []
+        #for value in data:
+            #if type(value) == float:
+                #newdata.append(float(value))
+            #else:
+                #newdata.append(str(value))
+        data = [list(map(float, data))]
+        #print(newdata)
+        #iparr = []
+        #iparr.append(newdata)
+        #print(iparr)
+        #response = predict(iparr)
+        response = predict(data)
         return response
 
 def api_response(dict_request):

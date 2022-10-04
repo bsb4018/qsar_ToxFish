@@ -36,7 +36,7 @@ input_data = {
 }
 
 TARGET_range = {
-    "min": 0.0,
+    "min": 0,
     "max": 10
 }
 

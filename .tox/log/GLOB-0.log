@@ -1,6 +1,6 @@
 action: GLOB, msg: packaging
 cwd: D:\work\work_DL2\qfish_toxicity
-cmd: 'C:\Users\shiv1\anaconda3\envs\fishtoxapp\python.exe' setup.py sdist --formats=zip --dist-dir 'D:\work\work_DL2\qfish_toxicity\.tox\dist'
+cmd: 'C:\Users\shiv1\miniconda3\envs\fishtoxapp\python.exe' setup.py sdist --formats=zip --dist-dir '.tox\dist'
 running sdist
 running egg_info
 writing src.egg-info\PKG-INFO
@@ -33,8 +33,7 @@ copying tests\__init__.py -> src-0.1\tests
 copying tests\conftest.py -> src-0.1\tests
 copying tests\test_config.py -> src-0.1\tests
 Writing src-0.1\setup.cfg
-creating D:\work\work_DL2\qfish_toxicity\.tox\dist
-creating 'D:\work\work_DL2\qfish_toxicity\.tox\dist\src-0.1.zip' and adding 'src-0.1' to it
+creating '.tox\dist\src-0.1.zip' and adding 'src-0.1' to it
 adding 'src-0.1'
 adding 'src-0.1\prediction_service'
 adding 'src-0.1\src'

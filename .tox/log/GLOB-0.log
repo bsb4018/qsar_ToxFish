@@ -1,11 +1,13 @@
 action: GLOB, msg: packaging
 cwd: D:\work\work_DL2\qfish_toxicity
-cmd: 'C:\Users\shiv1\miniconda3\envs\fishtoxapp\python.exe' setup.py sdist --formats=zip --dist-dir '.tox\dist'
+cmd: 'C:\Users\shiv1\miniconda3\envs\fishtoxapp\python.exe' setup.py sdist --formats=zip --dist-dir 'D:\work\work_DL2\qfish_toxicity\.tox\dist'
 running sdist
 running egg_info
+creating src.egg-info
 writing src.egg-info\PKG-INFO
 writing dependency_links to src.egg-info\dependency_links.txt
 writing top-level names to src.egg-info\top_level.txt
+writing manifest file 'src.egg-info\SOURCES.txt'
 reading manifest file 'src.egg-info\SOURCES.txt'
 writing manifest file 'src.egg-info\SOURCES.txt'
 running check
@@ -33,7 +35,8 @@ copying tests\__init__.py -> src-0.1\tests
 copying tests\conftest.py -> src-0.1\tests
 copying tests\test_config.py -> src-0.1\tests
 Writing src-0.1\setup.cfg
-creating '.tox\dist\src-0.1.zip' and adding 'src-0.1' to it
+creating D:\work\work_DL2\qfish_toxicity\.tox\dist
+creating 'D:\work\work_DL2\qfish_toxicity\.tox\dist\src-0.1.zip' and adding 'src-0.1' to it
 adding 'src-0.1'
 adding 'src-0.1\prediction_service'
 adding 'src-0.1\src'

@@ -68,7 +68,7 @@ FISH TOXICITY PREDICTION
                         <!-- Select output language here. -->
                         <div class="form-group">
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2">Predict</button></br>
+                        <button type="submit">Predict</button></br>
                         </br>
                     </form>
                     <!-- Translated text returned by the Translate API is rendered here. -->
@@ -79,11 +79,11 @@ FISH TOXICITY PREDICTION
                             <label for="translation-result">
 
                                 <blockquote class="blockquote">
-                                    <p class="mb-2" placeholder="predicted toxicity value from 0 to 10">Prediction:</p>
+                                    <p class="mb-2" placeholder="p">Prediction:</p>
                                 </blockquote>
 
                             </label>
-                            <textarea readonly class="form-control" id="exTextarea" rows="5">{{ response }}</textarea>
+                            <textarea readonly class="form-control" id="exTextarea" rows="5" placeholder="Fish Toxicity Range from 0(lowest) to 10(highest)">{{ response }}</textarea>
                         </div>
                     </form>
                 </div>
